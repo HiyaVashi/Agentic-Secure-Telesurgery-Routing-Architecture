@@ -1,0 +1,57 @@
+[
+  {
+    "_comment": "Case 1 — Heart surgery (high-risk, TCP preferred, matches paper's primary test case)",
+    "patient_id": "PT-2024-0042",
+    "type": "heart",
+    "vitals": {
+      "heart_rate_bpm":        78,
+      "blood_pressure_mmhg":   "120/80",
+      "oxygen_saturation_pct": 98,
+      "temperature_celsius":   36.8,
+      "respiratory_rate_rpm":  16,
+      "ecg_rhythm":            "sinus_rhythm",
+      "ejection_fraction_pct": 55
+    },
+    "notes": "Patient stable. Minor arrhythmia observed pre-op. Satellite link active via LEO constellation.",
+    "surgeon_id": "DR-CONSOLE-01",
+    "facility": "Remote Satellite Telesurgery Hub — Station Alpha",
+    "scheduled_utc": "2024-11-15T08:00:00Z"
+  },
+  {
+    "_comment": "Case 2 — Brain surgery (critical, ultra-low latency required, high-risk)",
+    "patient_id": "PT-2024-0091",
+    "type": "brain",
+    "vitals": {
+      "heart_rate_bpm":        64,
+      "blood_pressure_mmhg":   "110/70",
+      "oxygen_saturation_pct": 97,
+      "temperature_celsius":   36.5,
+      "respiratory_rate_rpm":  14,
+      "intracranial_pressure_mmhg": 12,
+      "gcs_score":             15,
+      "pupil_response":        "equal_and_reactive"
+    },
+    "notes": "Tumour resection. QUIC protocol recommended due to multi-path satellite routing. Extra pre-op checklist items required.",
+    "surgeon_id": "DR-CONSOLE-02",
+    "facility": "Remote Satellite Telesurgery Hub — Station Beta",
+    "scheduled_utc": "2024-11-16T10:30:00Z"
+  },
+  {
+    "_comment": "Case 3 — Orthopaedic surgery (medium-risk, tolerant of UDP fallback)",
+    "patient_id": "PT-2024-0137",
+    "type": "orthopedic",
+    "vitals": {
+      "heart_rate_bpm":        82,
+      "blood_pressure_mmhg":   "130/85",
+      "oxygen_saturation_pct": 99,
+      "temperature_celsius":   37.0,
+      "respiratory_rate_rpm":  18,
+      "pain_scale_0_to_10":   6,
+      "mobility_score":        "restricted_left_knee"
+    },
+    "notes": "ACL reconstruction. Network jitter slightly elevated (45ms). Protocol Switcher may select QUIC.",
+    "surgeon_id": "DR-CONSOLE-03",
+    "facility": "Remote Satellite Telesurgery Hub — Station Gamma",
+    "scheduled_utc": "2024-11-17T14:00:00Z"
+  }
+]

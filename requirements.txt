@@ -1,0 +1,21 @@
+# ─────────────────────────────────────────────────────────────────────
+# Telesurgery-LangChain — Dependencies
+# Install:  pip install -r requirements.txt
+# ─────────────────────────────────────────────────────────────────────
+
+# LangChain core
+langchain>=0.3.0
+langchain-core>=0.3.0
+
+# LLM integrations
+langchain-google-genai>=2.0.0      # Gemini 2.0 Flash Lite (paper default)
+langchain-ollama>=0.2.0            # Ollama local models (fallback)
+
+# Workflow orchestration
+langgraph>=0.2.0                   # Multi-agent state graph
+
+# Configuration & environment
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+cryptography>=45.0.0

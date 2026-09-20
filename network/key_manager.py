@@ -1,58 +1,102 @@
-from network.ecc import ECCHandler
+"""
+network/key_manager.py
+----------------------
+
+Central key manager for the telesurgery network.
+
+Maintains long-term ECDH key pairs for every participant.
+
+Architecture
+------------
+
+Doctor Agent
+Feedback Agent
+Security Agent
+Protocol Agent
+Robotic Agent
+Relay Nodes
+Backup Surgeon
+
+Each participant owns a persistent ECDH keypair.
+
+HybridCrypto creates ephemeral sender keys while these
+long-term keys represent the receiver identities.
+"""
+
+from __future__ import annotations
+
+from .ecdh import ECDH
 
 
 class KeyManager:
     """
-    Stores ECC key pairs for all agents.
+    Stores ECDH identities for every participant.
     """
 
-    def __init__(self):
-        self._keys = {}
+    def __init__(self) -> None:
 
-    def register_agent(self, agent_name: str):
+        self._participants: dict[str, ECDH] = {}
+
+    # ----------------------------------------------------------
+    # Registration
+    # ----------------------------------------------------------
+
+    def register(self, participant: str) -> None:
         """
-        Generate and store an ECC key pair for an agent.
-        """
+        Register a participant.
 
-        if agent_name not in self._keys:
-
-            private_key, public_key = ECCHandler.generate_key_pair()
-
-            self._keys[agent_name] = {
-                "private": private_key,
-                "public": public_key
-            }
-
-    def get_private_key(self, agent_name: str):
-        """
-        Return the private key of an agent.
+        Does nothing if already registered.
         """
 
-        if agent_name not in self._keys:
-            raise ValueError(f"{agent_name} is not registered.")
+        if participant not in self._participants:
+            self._participants[participant] = ECDH()
 
-        return self._keys[agent_name]["private"]
+    # ----------------------------------------------------------
+    # Lookup
+    # ----------------------------------------------------------
 
-    def get_public_key(self, agent_name: str):
-        """
-        Return the public key of an agent.
-        """
+    def exists(self, participant: str) -> bool:
+        return participant in self._participants
 
-        if agent_name not in self._keys:
-            raise ValueError(f"{agent_name} is not registered.")
+    def get_ecdh(self, participant: str) -> ECDH:
 
-        return self._keys[agent_name]["public"]
+        if participant not in self._participants:
+            raise KeyError(
+                f"Participant '{participant}' not registered."
+            )
 
-    def list_agents(self):
-        """
-        Return all registered agents.
-        """
+        return self._participants[participant]
 
-        return list(self._keys.keys())
+    def get_public_key(self, participant: str) -> bytes:
 
-    def has_agent(self, agent_name: str):
-        """
-        Check whether an agent is registered.
-        """
+        return self.get_ecdh(
+            participant
+        ).public_key_bytes()
 
-        return agent_name in self._keys
+    def get_private_key(self, participant: str):
+
+        return self.get_ecdh(
+            participant
+        ).private_key
+
+    # ----------------------------------------------------------
+    # Utilities
+    # ----------------------------------------------------------
+
+    def remove(self, participant: str) -> None:
+
+        self._participants.pop(
+            participant,
+            None,
+        )
+
+    def clear(self) -> None:
+
+        self._participants.clear()
+
+    def participants(self) -> list[str]:
+
+        return sorted(
+            self._participants.keys()
+        )
+    

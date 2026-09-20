@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-from dotenv import load_dotenv
-import os
-from database.csv_database import CSVDatabase
-
-csv_db = CSVDatabase()
-load_dotenv()
-
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-=======
 """
 config.py
 ─────────
@@ -129,4 +119,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
->>>>>>> a622173226c4d140cf54d90651d3ec0bdfa4d2dc

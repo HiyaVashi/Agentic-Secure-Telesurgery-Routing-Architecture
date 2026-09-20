@@ -1,71 +1,135 @@
-from network.clove import Clove
-from network.garlic_message import GarlicMessage
-from network.relay_manager import RelayManager
+"""
+network/garlic_router.py
+------------------------
+
+Garlic Routing Engine.
+
+Responsible for selecting a relay path for Garlic Messages.
+
+The router does NOT forward messages.
+
+It only constructs a secure multi-hop path which is then
+executed by RelayManager.
+"""
+
+from __future__ import annotations
+
+import random
+
+from .relay import Relay
+from .relay_manager import RelayManager
+from .garlic_message import GarlicMessage
 
 
 class GarlicRouter:
     """
-    Handles Garlic Routing.
-
-    Responsibilities:
-    - Wrap packets into Cloves
-    - Bundle Cloves into Garlic Messages
-    - Forward through RelayManager
-    - Extract packets at destination
+    Garlic Routing Engine.
     """
 
-    def __init__(self):
-
-        self.relay_manager = RelayManager()
-
-    def create_clove(
+    def __init__(
         self,
-        packet,
-        priority: int = 1
-    ):
+        relay_manager: RelayManager,
+    ) -> None:
 
-        return Clove(
+        self.relay_manager = relay_manager
 
-            destination=packet.receiver,
+    # ----------------------------------------------------------
+    # Route Selection
+    # ----------------------------------------------------------
 
-            priority=priority,
+    def build_route(
+        self,
+        hops: int = 3,
+    ) -> list[Relay]:
+        """
+        Construct a relay path.
 
-            packet=packet
+        Strategy
+        --------
+        1. Ignore offline relays
+        2. Sort by trust score
+        3. Randomly choose from the highest trusted relays
+        """
+
+        available = [
+
+            relay
+
+            for relay in self.relay_manager.relays
+
+            if relay.online
+
+        ]
+
+        if len(available) < hops:
+
+            raise RuntimeError(
+                "Not enough online relays."
+            )
+
+        # Highest trust first
+
+        available.sort(
+
+            key=lambda relay: relay.trust_score,
+
+            reverse=True,
+
         )
 
-    def create_garlic_message(
-        self,
-        cloves
-    ):
+        # Keep only the best relays
 
-        garlic = GarlicMessage()
+        top_relays = available[: max(hops * 2, hops)]
 
-        for clove in cloves:
-            garlic.add_clove(clove)
+        # Randomize among trusted relays
 
-        return garlic
-
-    def send(
-        self,
-        garlic_message,
-        hops=3
-    ):
-
-        garlic_message, relay_logs = self.relay_manager.forward(
-            garlic_message,
-            hops
+        route = random.sample(
+            top_relays,
+            hops,
         )
 
-        return garlic_message, relay_logs
+        return route
 
-    def extract_packets(
+    # ----------------------------------------------------------
+    # Route Message
+    # ----------------------------------------------------------
+
+    def route(
         self,
-        garlic_message
-    ):
+        garlic: GarlicMessage,
+        hops: int = 3,
+    ) -> GarlicMessage:
+        """
+        Build a route and execute it.
+        """
 
-        packets = []
+        route = self.build_route(hops)
 
-        for clove in garlic_message.cloves:
-            packets.append(clove.packet)
+        return self.relay_manager.execute_route(
+            garlic,
+            route,
+        )
 
-        return packets
+    # ----------------------------------------------------------
+    # Display
+    # ----------------------------------------------------------
+
+    @staticmethod
+    def print_route(
+        route: list[Relay],
+    ) -> None:
+
+        print()
+
+        print("=" * 60)
+
+        print("Selected Relay Path")
+
+        print("=" * 60)
+
+        for relay in route:
+
+            print(relay.relay_id)
+
+        print("=" * 60)
+        

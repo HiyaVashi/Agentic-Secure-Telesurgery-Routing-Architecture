@@ -1,58 +1,245 @@
-from datetime import datetime
-from uuid import uuid4
-from typing import List
+"""
+network/garlic_message.py
+-------------------------
 
-from pydantic import BaseModel, Field
+Garlic Message implementation.
 
-from network.clove import Clove
+A Garlic Message is a container that bundles one or more
+Cloves together before being forwarded through the relay
+network.
+
+Workflow
+--------
+
+EncryptedPacket
+        │
+        ▼
+      Clove
+        │
+        ▼
+ GarlicMessage
+        │
+        ▼
+ Relay Manager
+        │
+        ▼
+ Relay Nodes
+"""
+
+from __future__ import annotations
+
+import time
+import uuid
+
+from dataclasses import dataclass, field
+
+from .clove import Clove
 
 
-class GarlicMessage(BaseModel):
+@dataclass(slots=True)
+class GarlicMessage:
     """
-    Represents one Garlic Message containing
-    multiple encrypted Cloves.
+    Garlic Message.
+
+    Bundles multiple Cloves into a single routing message.
+
+    Parameters
+    ----------
+    garlic_id
+        Unique Garlic Message identifier.
+
+    cloves
+        Collection of Cloves.
+
+    created_at
+        UNIX timestamp.
     """
 
-    garlic_id: str = Field(
-        default_factory=lambda: str(uuid4())
+    cloves: list[Clove] = field(default_factory=list)
+
+    garlic_id: str = field(
+        default_factory=lambda: str(uuid.uuid4())
     )
 
-    cloves: List[Clove] = Field(default_factory=list)
-
-    relay_path: List[str] = Field(default_factory=list)
-
-    timestamp: str = Field(
-        default_factory=lambda: datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
+    created_at: float = field(
+        default_factory=time.time
     )
 
-    def add_clove(self, clove: Clove):
+    # ----------------------------------------------------------
+    # Clove Operations
+    # ----------------------------------------------------------
+
+    def add_clove(
+        self,
+        clove: Clove,
+    ) -> None:
         """
-        Add a clove to the garlic message.
+        Add a Clove to the Garlic Message.
+
+        Raises
+        ------
+        ValueError
+            If the Clove already exists.
         """
+
+        if clove.clove_id in self:
+            raise ValueError(
+                f"Clove '{clove.clove_id}' already exists."
+            )
+
         self.cloves.append(clove)
 
-    def remove_clove(self, clove_id: str):
+    def remove_clove(
+        self,
+        clove_id: str,
+    ) -> bool:
         """
-        Remove a clove by ID.
-        """
-        self.cloves = [
-            c for c in self.cloves
-            if c.clove_id != clove_id
-        ]
+        Remove a Clove by ID.
 
-    def total_cloves(self):
+        Returns
+        -------
+        bool
+            True if removed.
         """
-        Return number of cloves.
+
+        for index, clove in enumerate(self.cloves):
+
+            if clove.clove_id == clove_id:
+
+                self.cloves.pop(index)
+
+                return True
+
+        return False
+
+    def get_clove(
+        self,
+        clove_id: str,
+    ) -> Clove | None:
         """
+        Retrieve a Clove by ID.
+        """
+
+        for clove in self.cloves:
+
+            if clove.clove_id == clove_id:
+                return clove
+
+        return None
+
+    # ----------------------------------------------------------
+    # Serialization
+    # ----------------------------------------------------------
+
+    def to_dict(self) -> dict:
+        """
+        Serialize Garlic Message.
+        """
+
+        return {
+            "garlic_id": self.garlic_id,
+            "created_at": self.created_at,
+            "cloves": [
+                clove.to_dict()
+                for clove in self.cloves
+            ],
+        }
+
+    @classmethod
+    def from_dict(
+        cls,
+        data: dict,
+    ) -> "GarlicMessage":
+        """
+        Deserialize Garlic Message.
+        """
+
+        return cls(
+            garlic_id=data["garlic_id"],
+            created_at=data["created_at"],
+            cloves=[
+                Clove.from_dict(item)
+                for item in data["cloves"]
+            ],
+        )
+
+    # ----------------------------------------------------------
+    # Statistics
+    # ----------------------------------------------------------
+
+    @property
+    def clove_count(self) -> int:
+        """
+        Number of Cloves.
+        """
+
         return len(self.cloves)
 
-    def get_destinations(self):
+    @property
+    def total_payload_size(self) -> int:
         """
-        Return destinations of all cloves.
+        Total encrypted payload size.
         """
-        return [
-            clove.destination
+
+        return sum(
+            clove.packet_size
             for clove in self.cloves
-        ]
+        )
+
+    @property
+    def destinations(self) -> list[str]:
+        """
+        Unique destinations.
+        """
+
+        return sorted(
+            {
+                clove.destination
+                for clove in self.cloves
+            }
+        )
+
+    @property
+    def expired(self) -> bool:
+        """
+        Returns True if every Clove has expired.
+        """
+
+        return all(
+            clove.expired
+            for clove in self.cloves
+        )
+
+    # ----------------------------------------------------------
+    # Python Helpers
+    # ----------------------------------------------------------
+
+    def __len__(self) -> int:
+        return len(self.cloves)
+
+    def __iter__(self):
+        return iter(self.cloves)
+
+    def __getitem__(
+        self,
+        index: int,
+    ) -> Clove:
+        return self.cloves[index]
+
+    def __contains__(
+        self,
+        clove_id: str,
+    ) -> bool:
+        return any(
+            clove.clove_id == clove_id
+            for clove in self.cloves
+        )
+
+    def __repr__(self) -> str:
+        return (
+            f"GarlicMessage("
+            f"id={self.garlic_id}, "
+            f"cloves={len(self.cloves)}, "
+            f"payload={self.total_payload_size} bytes)"
+        )
+    
