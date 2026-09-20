@@ -1,0 +1,7 @@
+{
+    "latency": 180,
+    "packet_loss": 7,
+    "jitter": 42,
+    "bandwidth": 80,
+    "traffic_pattern": "Abnormally high incoming packets from multiple IP addresses."
+}

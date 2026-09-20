@@ -1,0 +1,4 @@
+Scenario_ID,Model,Diagnosis_Score,Security_Score,Protocol_Score,Feedback_Score,Robot_Score,Overall_Score,Weighted_Distance,Execution_Time
+TC01,Groq,0.0,0.0,1.0,0.0,0.0,0.2,0.8944271909999159,1.8652334213256836
+TC01,Groq,0.0,0.0,1.0,0.0,0.0,0.2,0.8944271909999159,1.9109249114990234
+TC01,Groq,0.0,1.0,0.0,1.0,0.5,0.5,0.733143914930759,2.0003573894500732

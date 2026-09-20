@@ -1,0 +1,29 @@
+attack_detected,attack_type,severity,confidence,recommended_action,timestamp,patient_id
+True,ddos,high,high,"Trigger rate limiting on edge routers, block offending IP ranges, and initiate protocol switching to safeguard telesurgery communication.",2026-07-13 16:12:29,P001
+True,ddos,high,0.8,block traffic from suspicious IP addresses,2026-07-23 22:38:30,P001
+True,ddos,high,0.8,Activate firewall rules and block suspicious IP addresses,2026-07-23 22:39:04,P001
+True,ddos,high,0.8,Activate firewall rules and block suspicious IP addresses,2026-07-23 22:43:16,P001
+True,ddos,high,0.8,block traffic from suspicious IP addresses,2026-07-23 22:50:11,P001
+True,ddos,high,0.8,block traffic from suspicious IP addresses,2026-07-23 22:56:32,P001
+True,ddos,high,0.8,Block traffic from suspicious IP addresses,2026-07-23 22:58:21,P001
+True,ddos,high,0.8,block traffic from suspicious IP addresses,2026-07-23 22:59:36,P001
+True,ddos,high,0.8,block traffic from suspicious IP addresses,2026-07-23 23:03:46,P001
+False,none,low,0.0,no action,2026-07-23 23:10:36,TC01
+False,none,low,0.0,no action,2026-07-24 13:12:06,TC01
+False,none,low,0.0,no action,2026-07-24 13:18:29,TC01
+False,none,low,0.0,no action,2026-07-24 13:25:04,TC01
+False,none,low,0.0,no action,2026-07-24 13:30:37,TC01
+False,none,low,0.0,no action,2026-07-24 13:30:48,TC02
+False,none,low,0.0,no action,2026-07-24 13:30:54,TC03
+False,none,low,1.0,none,2026-07-24 13:42:05,TC01
+False,none,low,0.0,none,2026-07-24 13:42:10,TC02
+False,none,low,0.0,none,2026-07-24 13:42:21,TC03
+False,none,low,1.0,none,2026-07-24 13:42:48,TC04
+False,none,low,1.0,none,2026-07-24 13:43:16,TC05
+False,none,low,1.0,none,2026-07-24 13:43:45,TC06
+False,none,low,1.0,none,2026-07-24 13:44:13,TC07
+False,none,low,1.0,none,2026-07-24 13:44:40,TC08
+False,none,low,1.0,none,2026-07-24 13:45:08,TC09
+False,none,low,1.0,none,2026-07-24 13:53:01,TC01
+False,none,low,1.0,none,2026-07-24 13:53:07,TC02
+False,none,low,1.0,none,2026-07-24 13:53:16,TC03

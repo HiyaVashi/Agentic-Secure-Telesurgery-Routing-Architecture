@@ -1,0 +1,13 @@
+{
+    "patient_id":"P001",
+    "age":46,
+    "gender":"Male",
+    "symptoms":[
+        "severe abdominal pain",
+        "fever",
+        "vomiting"
+    ],
+    "history":[
+        "hypertension"
+    ]
+}

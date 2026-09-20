@@ -1,0 +1,28 @@
+proceed,action,reason,confidence,timestamp,patient_id
+False,pause,High severity DDoS attack detected. Pausing robotic arm execution to safeguard patient safety while network mitigation and protocol switching to QUIC are finalized.,high,2026-07-13 16:12:56,P001
+False,pause,Security assessment indicates high severity attack detected,0.8,2026-07-23 22:39:05,P001
+False,pause,"Security threat detected, high severity attack",0.8,2026-07-23 22:43:17,P001
+False,abort,security risk due to ddos attack,high,2026-07-23 22:50:12,P001
+False,abort,Security assessment indicates high severity attack detected,high,2026-07-23 22:56:33,P001
+False,pause,Security threat detected,0.8,2026-07-23 22:58:22,P001
+False,pause,Security assessment indicates high severity attack detected,0.8,2026-07-23 22:59:36,P001
+False,pause,Security breach detected with high severity,0.8,2026-07-23 23:03:46,P001
+True,proceed,normal network and no attack detected,high,2026-07-23 23:10:37,TC01
+True,proceed,normal network and no attack detected,high,2026-07-24 13:12:07,TC01
+True,proceed,normal network and no attack detected,high,2026-07-24 13:18:29,TC01
+True,proceed,normal network and no attack detected,high,2026-07-24 13:25:04,TC01
+True,proceed,normal appendicitis diagnosis with high confidence and no security threats detected,high,2026-07-24 13:30:38,TC01
+True,proceed,surgery can safely proceed based on agent outputs,0.8,2026-07-24 13:30:48,TC02
+True,proceed,Low risk level and high confidence in diagnosis,High,2026-07-24 13:31:00,TC03
+True,proceed,normal network and no security threats detected,high,2026-07-24 13:42:05,TC01
+True,proceed,surgery can safely proceed based on agent outputs,80%,2026-07-24 13:42:11,TC02
+True,proceed,All assessments indicate low risk and no security threats.,High,2026-07-24 13:42:29,TC03
+True,proceed,emergency surgery required,90%,2026-07-24 13:42:58,TC04
+True,proceed,surgery can proceed safely,0.8,2026-07-24 13:43:26,TC05
+True,proceed,patient safety and surgical continuity prioritized,high,2026-07-24 13:43:53,TC06
+False,pause,low confidence in diagnosis and high risk level,low,2026-07-24 13:44:22,TC07
+False,pause,Incomplete patient record,50%,2026-07-24 13:44:49,TC08
+True,proceed,patient safety and surgical continuity prioritized,0.8,2026-07-24 13:45:17,TC09
+True,proceed,normal network and no attack detected,high,2026-07-24 13:53:02,TC01
+True,proceed,surgery can safely proceed based on agent outputs,0.8,2026-07-24 13:53:08,TC02
+True,proceed,low risk level and no security threats detected,high,2026-07-24 13:53:26,TC03

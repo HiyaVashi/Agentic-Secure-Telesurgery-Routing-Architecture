@@ -1,0 +1,28 @@
+protocol,reason,expected_latency,security_level,timestamp,patient_id
+QUIC,High severity attack detected,Low,High,2026-07-13 16:12:29,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:39:04,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:43:16,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:50:11,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:56:32,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:58:21,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 22:59:36,P001
+QUIC,High severity attack detected,Low,High,2026-07-23 23:03:46,P001
+UDP,Normal network,Low,Normal,2026-07-23 23:10:36,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:12:06,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:18:29,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:25:04,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:30:37,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:30:48,TC02
+UDP,Normal network,Low,Normal,2026-07-24 13:30:54,TC03
+UDP,Normal network,Low,Normal,2026-07-24 13:42:05,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:42:10,TC02
+UDP,Normal network,Low,Normal,2026-07-24 13:42:21,TC03
+UDP,Normal network,Low,Normal,2026-07-24 13:42:48,TC04
+UDP,Normal network,Low,Normal,2026-07-24 13:43:16,TC05
+UDP,Normal network,Low,Normal,2026-07-24 13:43:45,TC06
+UDP,Normal network,Low,Normal,2026-07-24 13:44:13,TC07
+UDP,Normal network,Low,Normal,2026-07-24 13:44:40,TC08
+UDP,Normal network,Low,Normal,2026-07-24 13:45:08,TC09
+UDP,Normal network,Low,Normal,2026-07-24 13:53:01,TC01
+UDP,Normal network,Low,Normal,2026-07-24 13:53:07,TC02
+UDP,Normal network,Low,Normal,2026-07-24 13:53:16,TC03

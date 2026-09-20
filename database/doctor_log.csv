@@ -1,0 +1,30 @@
+patient_id,diagnosis,recommended_surgery,urgency,estimated_duration,required_tools,risk_level,confidence,timestamp
+P001,Acute appendicitis,Laparoscopic appendectomy,urgent,60 minutes,"['Laparoscope', 'Trocars', 'Grasping forceps', 'Endoloop', 'Scalpel']",medium,high,2026-07-13 16:10:38
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 22:37:43
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 22:38:30
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 22:39:03
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 22:43:15
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical scissors', 'forceps']",medium,high,2026-07-23 22:50:10
+P001,appendicitis,appendectomy,urgent,60 minutes,"['scalpel', 'forceps', 'retractor']",medium,high,2026-07-23 22:56:31
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 22:58:20
+P001,appendicitis,appendectomy,urgent,60 minutes,"['scalpel', 'forceps', 'retractor']",medium,high,2026-07-23 22:59:35
+P001,appendicitis,appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 23:03:45
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-23 23:10:36
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:12:06
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:18:28
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:25:03
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:30:35
+TC02,Cholecystitis vs appendicitis,Laparoscopic Cholecystectomy or Laparoscopic Appendectomy,urgent,60-90 minutes,"['Laparoscope', 'Surgical stapler', 'Dissecting instruments']",medium,80%,2026-07-24 13:30:47
+TC03,Low severity condition,Routine monitoring and treatment,Routine,30 minutes,['Standard medical equipment'],Low,High,2026-07-24 13:30:53
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:42:04
+TC02,Cholecystitis vs appendicitis,Laparoscopic Cholecystectomy or Laparoscopic Appendectomy,urgent,60-90 minutes,"['Laparoscope', 'Surgical stapler', 'Dissecting forceps']",medium,80%,2026-07-24 13:42:10
+TC03,Low severity,Routine procedure,Routine,30 minutes,['Standard surgical tools'],Low,High,2026-07-24 13:42:15
+TC04,Emergency trauma,Emergency surgery,critical,60 minutes,"['surgical scissors', 'forceps', 'retractors']",high,90%,2026-07-24 13:42:39
+TC05,Multiple diseases,General surgery,routine,60 minutes,"['Scalpel', 'Forceps', 'Suture']",medium,0.8,2026-07-24 13:43:07
+TC06,Age-specific symptoms,Pediatric surgery,routine,60 minutes,"['surgical scissors', 'forceps', 'retractors']",low,high,2026-07-24 13:43:36
+TC07,Partial input,Exploratory surgery,critical,60 minutes,"['Scalpel', 'Forceps', 'Suture']",high,low,2026-07-24 13:44:03
+TC08,Incomplete record,Further evaluation,routine,60 minutes,['none'],low,50%,2026-07-24 13:44:32
+TC09,Ambiguous input,Diagnostic procedure,routine,60 minutes,['standard surgical instruments'],low,medium,2026-07-24 13:44:59
+TC01,Normal appendicitis,Appendectomy,urgent,60 minutes,"['laparoscope', 'surgical stapler', 'forceps']",medium,high,2026-07-24 13:53:01
+TC02,Cholecystitis vs appendicitis,Laparoscopic Cholecystectomy or Laparoscopic Appendectomy,urgent,60-90 minutes,"['Laparoscope', 'Surgical stapler', 'Dissecting forceps']",medium,80%,2026-07-24 13:53:07
+TC03,Low severity,Routine monitoring,routine,30 minutes,['standard monitoring equipment'],low,high,2026-07-24 13:53:12
